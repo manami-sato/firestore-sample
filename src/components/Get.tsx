@@ -1,13 +1,12 @@
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
-import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
-import { firebaseApp, TARGET_COLLECTION_NAME } from '../src/libs/firebase';
+import { FC, useEffect, useState } from 'react';
+import { firebaseApp, TARGET_COLLECTION_NAME } from '../libs/firebase';
 
 type dataType = {
   name: string;
 };
 
-const Get: NextPage = () => {
+const Set: FC = () => {
   const [data, setData] = useState<dataType[]>();
   useEffect(() => {
     const firebase = async () => {
@@ -40,4 +39,4 @@ const Get: NextPage = () => {
   );
 };
 
-export default Get;
+export default Set;

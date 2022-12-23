@@ -1,9 +1,8 @@
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
-import type { NextPage } from 'next';
-import { useState } from 'react';
-import { firebaseApp, TARGET_COLLECTION_NAME } from '../src/libs/firebase';
+import { useState, FC } from 'react';
+import { firebaseApp, TARGET_COLLECTION_NAME } from '../libs/firebase';
 
-const Set: NextPage = () => {
+const Set: FC = () => {
   const [data, setData] = useState<string>();
   const setValue = (e: string) => {
     setData(e);
