@@ -1,28 +1,20 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
-import { firebaseConfig } from './firebaseConfig';
-import {
-  collection,
-  getDocs,
-  getFirestore,
-} from 'firebase/firestore';
+// import { firebaseConfig } from './firebaseConfig';
 
-const firebaseApp = !getApps().length
+const firebaseConfig = {
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || '',
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || '',
+  databaseURL: `https://${
+    process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || ''
+  }.firebaseio.com`,
+};
+
+export const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
 
-const TARGET_COLLECTION_NAME = 'users';
-
-export default async function () {
-  try {
-    const db = getFirestore(firebaseApp);
-    // const q = collection(db, TARGET_COLLECTION_NAME);
-    const querySnapshot = await getDocs(collection(db, TARGET_COLLECTION_NAME));
-    const ret: any = [];
-    querySnapshot.forEach((doc) => {
-      ret.push(doc.data());
-    });
-    return ret;
-  } catch (error) {
-    console.log('error');
-  }
-}
+export default { firebaseApp };
