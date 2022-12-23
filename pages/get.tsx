@@ -3,12 +3,12 @@ import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import { firebaseApp, TARGET_COLLECTION_NAME } from '../src/libs/firebase';
 
-type hogeType = {
+type dataType = {
   name: string;
 };
 
 const Set: NextPage = () => {
-  const [hoge, setHoge] = useState<hogeType[]>();
+  const [data, setData] = useState<dataType[]>();
   useEffect(() => {
     const firebase = async () => {
       try {
@@ -19,7 +19,7 @@ const Set: NextPage = () => {
         querySnapshot.forEach((doc) => {
           ret.push(doc.data());
         });
-        setHoge(ret);
+        setData(ret);
       } catch (error) {
         console.log('error');
       }
@@ -29,9 +29,9 @@ const Set: NextPage = () => {
 
   return (
     <div>
-      {hoge !== undefined && (
+      {data !== undefined && (
         <>
-          {hoge.map((item: hogeType, i: number) => (
+          {data.map((item: dataType, i: number) => (
             <div key={i}>{item.name}</div>
           ))}
         </>

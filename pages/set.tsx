@@ -8,16 +8,20 @@ const Get: NextPage = () => {
   const setValue = (e: string) => {
     setData(e);
   };
-  const setFirebase = async () => {
-    const db = getFirestore(firebaseApp);
-    const col = collection(db, TARGET_COLLECTION_NAME);
-    await addDoc(col, { name: data });
-    console.log('success!' + data);
+  const firebase = async () => {
+    try {
+      const db = getFirestore(firebaseApp);
+      const col = collection(db, TARGET_COLLECTION_NAME);
+      await addDoc(col, { name: data });
+      console.log('success!' + data);
+    } catch (error) {
+      console.log('error');
+    }
   };
   return (
     <div>
       <input type="text" onChange={(e: any) => setValue(e.target.value)} />
-      <button onClick={() => setFirebase()}>set nijisanji</button>
+      <button onClick={() => firebase()}>set nijisanji</button>
     </div>
   );
 };
