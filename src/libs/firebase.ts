@@ -1,5 +1,6 @@
 import { getApp, getApps, initializeApp } from 'firebase/app';
-// import { firebaseConfig } from './firebaseConfig';
+
+export const TARGET_COLLECTION_NAME = 'users';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || '',
@@ -16,5 +17,3 @@ const firebaseConfig = {
 export const firebaseApp = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
-
-export default { firebaseApp };

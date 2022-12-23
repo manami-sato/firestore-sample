@@ -1,7 +1,7 @@
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import firebase from '../src/libs/getFirebase';
+import { firebaseApp, TARGET_COLLECTION_NAME } from '../src/libs/firebase';
 
 type hogeType = {
   name: string;
@@ -10,10 +10,21 @@ type hogeType = {
 const Set: NextPage = () => {
   const [hoge, setHoge] = useState<hogeType[]>();
   useEffect(() => {
-    const fuga = async () => {
-      setHoge(await firebase());
+    const firebase = async () => {
+      try {
+        const db = getFirestore(firebaseApp);
+        const col = collection(db, TARGET_COLLECTION_NAME);
+        const querySnapshot = await getDocs(col);
+        const ret: any = [];
+        querySnapshot.forEach((doc) => {
+          ret.push(doc.data());
+        });
+        setHoge(ret);
+      } catch (error) {
+        console.log('error');
+      }
     };
-    fuga();
+    firebase();
   }, []);
 
   return (
