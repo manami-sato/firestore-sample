@@ -1,12 +1,12 @@
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { FC, useEffect, useState } from 'react';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { firebaseApp, TARGET_COLLECTION_NAME } from '../libs/firebase';
 
 type dataType = {
   name: string;
 };
 
-const Set: FC = () => {
+const Get: FC = () => {
   const [data, setData] = useState<dataType[]>();
   useEffect(() => {
     const firebase = async () => {
@@ -39,4 +39,4 @@ const Set: FC = () => {
   );
 };
 
-export default Set;
+export default Get;

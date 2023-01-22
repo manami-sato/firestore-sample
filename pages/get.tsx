@@ -1,5 +1,5 @@
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import type { NextPage } from 'next';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { firebaseApp, TARGET_COLLECTION_NAME } from '../src/libs/firebase';
 
